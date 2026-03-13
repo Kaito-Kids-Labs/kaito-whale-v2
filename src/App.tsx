@@ -128,7 +128,7 @@ function App() {
         </div>
       )}
       {/* Header Elegan */}
-      <header className="pt-6 pb-4 px-6 bg-slate-900 rounded-b-3xl shadow-md border-b border-slate-800 flex flex-col items-center relative shrink-0">
+      <header className="pt-6 pb-4 px-6 bg-slate-900 rounded-b-3xl shadow-md border-b border-slate-800 flex flex-col items-center relative shrink-0 z-50">
         
         {/* Tombol Kembali (Jika sedang di Mode Latihan / Guide) */}
         {(showTraining || showGuide || showDictionary) && (
@@ -176,7 +176,7 @@ function App() {
 
           {/* Dropdown Menu */}
           {showMenu && (
-            <div className="absolute right-0 mt-2 w-48 bg-slate-800 rounded-xl shadow-xl border border-slate-700 py-2 z-50 overflow-hidden">
+            <div className="absolute right-0 mt-2 w-48 bg-slate-800 rounded-xl shadow-2xl border border-slate-700 py-2 z-[100] overflow-hidden">
               {/* Tombol Suara */}
               <button
                 type="button"
