@@ -5,7 +5,7 @@ import { Training } from './components/Training'
 import { useWebSocket } from './core/useWebSocket'
 import { speak } from './core/speech'
 import { vibrateForWord } from './core/vibration'
-import { wordToPattern } from './core/vibrationDictionary'
+import { kategoriJawaban, kategoriKebutuhan, kategoriKondisi, kategoriBantuan } from './core/vibrationDictionary'
 
 function App() {
   const [myId, setMyId] = useState<string>('')
@@ -278,14 +278,57 @@ function App() {
               </p>
             </div>
 
-            <div className="bg-slate-900 rounded-xl p-4 border border-slate-800">
-              <div className="grid grid-cols-2 gap-2">
-                {Object.entries(wordToPattern).map(([word, pattern]) => (
-                  <div key={word} className="bg-slate-950/50 border border-slate-800/50 rounded-lg px-3 py-2 flex justify-between items-center">
-                    <span className="text-xs font-medium text-slate-200">{word}</span>
-                    <span className="font-mono font-bold tracking-widest text-xs text-blue-400 bg-blue-900/20 px-1.5 rounded">{String(pattern)}</span>
-                  </div>
-                ))}
+            <div className="space-y-4">
+              {/* Seksi Jawaban Dasar */}
+              <div className="bg-slate-900 rounded-xl p-4 border border-slate-800">
+                <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-3 border-b border-slate-800 pb-2">Jawaban Dasar</h3>
+                <div className="grid grid-cols-2 gap-2">
+                  {Object.entries(kategoriJawaban).map(([pattern, word]) => (
+                    <div key={word} className="bg-slate-950/50 border border-slate-800/50 rounded-lg px-3 py-2 flex justify-between items-center">
+                      <span className="text-xs font-medium text-slate-200">{word}</span>
+                      <span className="font-mono font-bold tracking-widest text-xs text-blue-400 bg-blue-900/20 px-1.5 rounded">{pattern}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Seksi Kebutuhan Primer */}
+              <div className="bg-slate-900 rounded-xl p-4 border border-slate-800">
+                <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-3 border-b border-slate-800 pb-2">Kebutuhan Primer</h3>
+                <div className="grid grid-cols-2 gap-2">
+                  {Object.entries(kategoriKebutuhan).map(([pattern, word]) => (
+                    <div key={word} className="bg-slate-950/50 border border-slate-800/50 rounded-lg px-3 py-2 flex justify-between items-center">
+                      <span className="text-xs font-medium text-slate-200">{word}</span>
+                      <span className="font-mono font-bold tracking-widest text-xs text-blue-400 bg-blue-900/20 px-1.5 rounded">{pattern}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Seksi Kondisi Fisik */}
+              <div className="bg-slate-900 rounded-xl p-4 border border-slate-800">
+                <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-3 border-b border-slate-800 pb-2">Kondisi Fisik</h3>
+                <div className="grid grid-cols-2 gap-2">
+                  {Object.entries(kategoriKondisi).map(([pattern, word]) => (
+                    <div key={word} className="bg-slate-950/50 border border-slate-800/50 rounded-lg px-3 py-2 flex justify-between items-center">
+                      <span className="text-xs font-medium text-slate-200">{word}</span>
+                      <span className="font-mono font-bold tracking-widest text-xs text-blue-400 bg-blue-900/20 px-1.5 rounded">{pattern}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Seksi Bantuan & Darurat */}
+              <div className="bg-slate-900 rounded-xl p-4 border border-slate-800">
+                <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-3 border-b border-slate-800 pb-2">Bantuan & Darurat</h3>
+                <div className="grid grid-cols-2 gap-2">
+                  {Object.entries(kategoriBantuan).map(([pattern, word]) => (
+                    <div key={word} className="bg-slate-950/50 border border-slate-800/50 rounded-lg px-3 py-2 flex justify-between items-center">
+                      <span className="text-xs font-medium text-slate-200">{word}</span>
+                      <span className="font-mono font-bold tracking-widest text-xs text-blue-400 bg-blue-900/20 px-1.5 rounded">{pattern}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </section>
