@@ -128,7 +128,7 @@ function App() {
         </div>
       )}
       {/* Header Elegan */}
-      <header className="pt-12 pb-5 px-6 bg-slate-900 rounded-b-3xl shadow-md border-b border-slate-800 flex flex-col items-center relative shrink-0">
+      <header className="pt-6 pb-4 px-6 bg-slate-900 rounded-b-3xl shadow-md border-b border-slate-800 flex flex-col items-center relative shrink-0">
         
         {/* Tombol Kembali (Jika sedang di Mode Latihan / Guide) */}
         {(showTraining || showGuide || showDictionary) && (
@@ -139,30 +139,30 @@ function App() {
               setShowGuide(false)
               setShowDictionary(false)
             }}
-            className="absolute top-11 left-4 px-3 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5 text-xs font-bold shadow-sm"
+            className="absolute top-1/2 -translate-y-1/2 left-4 w-10 h-10 rounded-full bg-slate-800/80 border border-slate-700 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center justify-center shadow-sm"
+            aria-label="Kembali"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
               <path fillRule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clipRule="evenodd" />
             </svg>
-            Kembali
           </button>
         )}
 
-        <div className="flex items-center justify-center gap-3 mt-4 sm:mt-0 mb-2">
-          <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-500/50 shadow-[0_0_10px_rgba(59,130,246,0.3)] shrink-0 bg-white">
+        <div className="flex items-center justify-center gap-3 mb-1.5">
+          <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-blue-500/50 shadow-[0_0_10px_rgba(59,130,246,0.3)] shrink-0 bg-white">
             <img src="/assets/kaito-whale-logo.png" alt="Kaito Whale Logo" className="w-full h-full object-cover scale-110" />
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-white">
+          <h1 className="text-2xl font-extrabold tracking-tight text-white">
             KAITO <span className="text-blue-500">WHALE</span>
           </h1>
         </div>
-        <p className="text-sm font-medium text-slate-400 bg-slate-800 px-3 py-1 rounded-full">
+        <p className="text-[11px] font-medium text-slate-400 bg-slate-800 px-3 py-1 rounded-full">
           Aksesibilitas Tunanetra & Tunarungu
         </p>
         
         {/* Tombol Menu 3-Titik di Pojok Kanan Atas (Hanya tampil di halaman Chat utama) */}
         {!showTraining && !showGuide && !showDictionary && (
-          <div className="absolute top-11 right-4">
+          <div className="absolute top-1/2 -translate-y-1/2 right-4">
           <button
             type="button"
             onClick={() => setShowMenu(!showMenu)}
