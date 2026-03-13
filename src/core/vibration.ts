@@ -12,6 +12,28 @@ export const VibrationPatterns = {
 } as const
 
 /**
+ * Sinyal getaran khusus untuk mode latihan (tunanetra+tunarungu).
+ * PENTING: pola sinyal ini HARUS sangat berbeda dari pola kata (dot 180ms / dash 700ms)
+ * agar pengguna bisa membedakan "ini sinyal sistem" vs "ini pola kata".
+ *
+ * Format: [getar, jeda, getar, jeda, ...] dalam milidetik.
+ */
+export const TrainingFeedback = {
+  /** Perhatian, pola kata akan dimulai — 2 ketukan sangat pendek */
+  mulai: [50, 80, 50],
+  /** Pola kata sudah selesai — jeda panjang lalu 3 ketukan ultra-pendek cepat */
+  selesaiKata: [30, 50, 30, 50, 30],
+  /** Jawaban BENAR — 3 getar sedang dengan ritme cepat */
+  benar: [100, 60, 100, 60, 100],
+  /** Jawaban SALAH — 1 getar panjang bergetar */
+  salah: [500],
+  /** Sekarang giliran kamu input — 4 ketukan pendek cepat */
+  giliranmu: [40, 40, 40, 40, 40, 40, 40],
+  /** Level selesai — pola naik (pendek → sedang → panjang) */
+  levelSelesai: [60, 80, 120, 80, 200, 80, 350],
+} as const
+
+/**
  * Getaran: di HP (Capacitor) pakai Haptics native, di browser pakai Web Vibration API.
  * Mengembalikan Promise yang resolve setelah getaran benar-benar selesai,
  * agar bisa di-await dan jeda antar simbol tidak tumpang tindih.
@@ -61,5 +83,12 @@ export async function vibrateForWord(word: string) {
     }
     await sleep(OUTPUT_GAP_MS)
   }
+}
+
+/** Memutar sinyal umpan balik latihan (untuk tunanetra+tunarungu — hanya getaran, tanpa teks/suara). */
+export async function vibrateTrainingFeedback(
+  type: keyof typeof TrainingFeedback,
+): Promise<void> {
+  await vibrate(TrainingFeedback[type])
 }
 

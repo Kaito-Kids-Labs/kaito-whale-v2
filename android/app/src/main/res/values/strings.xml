@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Getar Komunikasi</string>
-    <string name="title_activity_main">Getar Komunikasi</string>
+    <string name="app_name">Kaito Whale</string>
+    <string name="title_activity_main">Kaito Whale</string>
     <string name="package_name">com.kaito.getar</string>
     <string name="custom_url_scheme">com.kaito.getar</string>
 </resources>

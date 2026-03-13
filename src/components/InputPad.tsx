@@ -116,12 +116,12 @@ export function InputPad({
   }
 
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div className="flex flex-col items-center">
       <div
         role="button"
         tabIndex={-1}
         inputMode="none"
-        className="w-72 h-72 rounded-full bg-slate-300 active:bg-slate-400 focus:outline-none shadow-2xl select-none touch-none"
+        className="relative w-64 h-64 rounded-full bg-slate-600 active:bg-slate-500 border-4 border-slate-500 focus:outline-none shadow-2xl select-none touch-none transition-all duration-300 ease-in-out cursor-pointer hover:scale-[1.02] flex items-center justify-center overflow-hidden"
         onMouseDown={handlePressStart}
         onMouseUp={handlePressEnd}
         onMouseLeave={handlePressEnd}
@@ -129,6 +129,14 @@ export function InputPad({
         onTouchEnd={touchEnd}
         onFocus={(e) => e.target.blur()}
       >
+        <div className="flex flex-col items-center gap-2 pointer-events-none">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-white/50">
+            <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" clipRule="evenodd" />
+          </svg>
+          <span className="text-sm font-semibold tracking-wider text-white/70">
+            SENTUH DI SINI
+          </span>
+        </div>
         <span className="sr-only">Input getaran (tekan &amp; tahan)</span>
       </div>
     </div>

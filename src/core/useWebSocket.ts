@@ -12,6 +12,7 @@ const BASE_URL = import.meta.env.VITE_WS_URL || 'ws://168.231.118.74:8080/ws'
 export function useWebSocket(userId: string, peerId: string) {
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const wsRef = useRef<WebSocket | null>(null)
+  const reconnectTimeoutRef = useRef<number | null>(null)
 
   const userIdRef = useRef(userId)
   const peerIdRef = useRef(peerId)
@@ -24,7 +25,11 @@ export function useWebSocket(userId: string, peerId: string) {
       return
     }
 
-    const debounce = setTimeout(() => {
+    let isMounted = true
+
+    const connect = () => {
+      if (!isMounted) return
+
       const url = `${BASE_URL}?userId=${encodeURIComponent(userId)}`
       console.log('[KAITO][WS] connecting', url)
 
@@ -34,6 +39,8 @@ export function useWebSocket(userId: string, peerId: string) {
         wsRef.current = ws
       } catch (error) {
         console.error('[KAITO][WS] gagal buat WebSocket', String(error))
+        // Coba lagi nanti
+        reconnectTimeoutRef.current = window.setTimeout(connect, 3000)
         return
       }
 
@@ -47,6 +54,12 @@ export function useWebSocket(userId: string, peerId: string) {
 
       ws.onclose = (event) => {
         console.log('[KAITO][WS] close', event.code, event.reason)
+        wsRef.current = null
+        // Auto-reconnect jika komponen masih mount
+        if (isMounted) {
+          console.log('[KAITO][WS] mencoba reconnect dalam 3 detik...')
+          reconnectTimeoutRef.current = window.setTimeout(connect, 3000)
+        }
       }
 
       ws.onmessage = (event) => {
@@ -62,12 +75,21 @@ export function useWebSocket(userId: string, peerId: string) {
           console.error('[KAITO][WS] payload invalid', String(error), 'raw=', event.data)
         }
       }
-    }, 400)
+    }
+
+    // Debounce awal saat userId berubah
+    const debounce = setTimeout(connect, 400)
 
     return () => {
+      isMounted = false
       clearTimeout(debounce)
+      if (reconnectTimeoutRef.current) {
+        clearTimeout(reconnectTimeoutRef.current)
+      }
       if (wsRef.current) {
         console.log('[KAITO][WS] cleanup, closing socket')
+        // Hapus onclose handler agar tidak memicu reconnect saat unmount
+        wsRef.current.onclose = null
         wsRef.current.close()
         wsRef.current = null
       }
